@@ -23,44 +23,58 @@ class Auth extends BaseController
 
     public function cek_login()
     {
-
-        if ($this->validate([
+        if( $this->validate([
             'username' => [
                 'label' => 'Username',
                 'rules' => 'required',
                 'errors' => [
-                    'reruired'=> '{field} Wajib Di isi']
+                    'required'=> '{field} Wajib Di isi']
             ],
-            'Akses Sebagai' => [
+            'hak_akses' => [
                 'label' => 'Hak Akses',
                 'rules' => 'required',
                 'errors' => [
-                    'reruired'=> '{field} Wajib Di isi'
-                ]
+                    'required'=> '{field} Wajib Di isi' ]
             ],
             'password' => [
                 'label' => 'Password',
                 'rules' => 'required',
                 'errors' => [
-                    'reruired'=> '{field} Wajib Di isi'
-                ]
+                    'required'=> '{field} Wajib Di isi' ]
             ],
         ])) {
             //jika valid
-        } else {
-            //jika tidak valid
-            session()->setFlashdata('errors', \Config\Services::validation()->getErrors());
-            return redirect()->to(base_url('auth'));
-        }
-
-        $hak_akses = $this->request->getPost('Akses Sebagai');
+            $hak_akses = $this->request->getPost('Hak Akses');
+            $username = $this->request->getPost('username');
+            $password = $this->request->getPost('password');
 
         if ($hak_akses == 1) {
-            echo 'Teknisi';
+            $cek_user = $this->ModelAuth->login_user($username, $password);
+            if ($cek_user) {
+            // jika data cocok
+                session()->set('log', true);
+                session()->set('username', $cek_user['username']);
+                session()->set('foto', $cek_user['foto']);
+                session()->set('Hak Akses', $hak_akses);
+                //login
+                return redirect()->to(base_url('Teknisi'));
+            } else {
+                // jika data tidak cocok
+                session()->setFlashdata('pesan', 'Login Gagal!, Username Atau Password Salah !!');
+                return redirect()->to(base_url('auth/index'));
+            }
+
         } elseif ($hak_akses == 2) {
             echo 'Guru';
         } elseif ($hak_akses == 3) {
             echo 'Siswa';
         }
+        } else {
+            //jika tidak valid
+            session()->setFlashdata('errors', \Config\Services::validation()->getErrors());
+            return redirect()->to(base_url('auth/index'));
+        }
+
+        
     }
 }
