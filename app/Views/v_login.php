@@ -19,13 +19,18 @@
     <?php } ?>
 
     <?php 
-
     if (session()->getFlashdata('pesan')) {
-      echo '<div class="alert alert-warning" role="alert">';
-      echo session()->getFlashdata('pesan');
-      echo '</div>';
+        echo '<div class="alert alert-warning" role="alert">';
+        echo session()->getFlashdata('pesan');
+        echo '</div>';
     }
+    if (session()->getFlashdata('sukses')) {
+      echo '<div class="alert alert-success" role="alert">';
+      echo session()->getFlashdata('sukses');
+      echo '</div>';
+  }
     ?>
+
     <?php 
     echo form_open('auth/cek_login');
     ?>
@@ -38,7 +43,7 @@
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <select name="hak akses" class="form-control">
+        <select name="hak_akses" class="form-control">
           <option value="">--Hak Akses--</option>
           <option value="1">1. Teknisi</option>
           <option value="2">2. Guru</option>

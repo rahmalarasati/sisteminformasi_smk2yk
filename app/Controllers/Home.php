@@ -12,4 +12,14 @@ class Home extends BaseController
         ];
         return view('layout/v_wrapper', $data);
     }
+
+    public function index2(): string
+    {
+        $data= [
+            'title' => 'Home',
+            'isi' => 'v_home'
+        ];
+        return view('layout/v_wrapper', $data);
+    }
+
 }
