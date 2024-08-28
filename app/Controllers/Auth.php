@@ -54,7 +54,7 @@ class Auth extends BaseController
                 // jika data cocok
                 session()->set('log', true);
                 session()->set('user_username', $cek_user['user_username']);
-                session()->set('nama', $cek_user['user_nama']);
+                session()->set('user_nama', $cek_user['user_nama']);
                 session()->set('user_foto', $cek_user['user_foto']);
                 session()->set('Hak Akses', $hak_akses);
                 //login
@@ -80,7 +80,7 @@ class Auth extends BaseController
     {
         session()->remove('log');
         session()->remove('user_username');
-        session()->remove('nama');
+        session()->remove('user_nama');
         session()->remove('foto');
         session()->remove('Hak Akses');
         session()->setFlashdata('sukses', 'Logout Sukses!!');

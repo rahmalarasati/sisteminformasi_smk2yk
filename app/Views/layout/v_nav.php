@@ -42,7 +42,7 @@
                   <img src="<?= base_url('foto/' . session()->get('user_foto')) ?>" class="img-circle" alt="User Image">
 
                   <p>
-                    <?php session()->get('nama') ?> - <?php if(session()->get('Hak Akses')==1){
+                    <?php session()->get('user_nama') ?> - <?php if(session()->get('Hak Akses')==1){
                         echo 'Teknisi';
                       } elseif (session()->get('Hak Akses')==2) {
                         echo 'Guru';

@@ -10,7 +10,8 @@ class ModelAuth extends Model
     {
         return $this->db->table('tbl_user')->where([
             'user_username' => $username,
-            'user_password' => $password
+            'user_password' => $password,
+            'user_nama'     => $user_nama
         ])->get()->getRowArray();
     }
 }

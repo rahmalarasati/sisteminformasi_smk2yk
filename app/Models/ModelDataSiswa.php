@@ -12,4 +12,9 @@ class ModelDataSiswa extends Model
         ->orderBy('siswa_nis', 'DESC')
         ->get()->getResultArray();
     }
+
+    public function add($data)
+    {
+        $this->db->table('tbl_siswa')->insert($data);
+    }
 }
